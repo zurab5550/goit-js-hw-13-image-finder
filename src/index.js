@@ -47,11 +47,9 @@ refs.ulGallery.addEventListener('click', function (e) {
     return;
   }
 
-  const largeImage = e.target.dataset.largeimage;
-
-  if (largeimage) {
+  if (e.target.dataset.largeimage) {
     const instance = basicLightbox.create(`
-        <img src="${largeImage}" width="800" height="600">
+        <img src="${e.target.dataset.largeimage}" width="800" height="600">
     `);
 
     instance.show();
