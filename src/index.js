@@ -1,6 +1,8 @@
 import './styles.css';
 import pixabayService from './js/apiService.js';
 import cardPhoto from './templates/photo.hbs';
+import * as basicLightbox from 'basiclightbox';
+import 'basiclightbox/dist/basicLightbox.min.css';
 
 export const refs = {
   ulGallery: document.querySelector('.gallery'),
@@ -23,7 +25,9 @@ refs.loadMoreButton.addEventListener('click', loadMore);
 async function loadMore(e) {
   e.preventDefault();
   pixabayService.pageNumber++;
-  const lastVisiblePhoto = document.querySelector('.photo-card:last-child');
+  const lastVisiblePhoto = document.querySelector(
+    '.list-photo-card:last-child',
+  );
   const scrollValue =
     lastVisiblePhoto.offsetTop + lastVisiblePhoto.clientHeight + 20;
   const photos = await pixabayService.get(refs.searchFormInput.value);
@@ -37,3 +41,19 @@ async function loadMore(e) {
 export function formGalleryCleaner() {
   refs.searchForm.reset();
 }
+
+refs.ulGallery.addEventListener('click', function (e) {
+  if (e.target.nodeName !== 'IMG') {
+    return;
+  }
+
+  const largeImage = e.target.dataset.largeimage;
+
+  if (largeimage) {
+    const instance = basicLightbox.create(`
+        <img src="${largeImage}" width="800" height="600">
+    `);
+
+    instance.show();
+  }
+});

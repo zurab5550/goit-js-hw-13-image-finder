@@ -37,17 +37,23 @@ body {
 }
 .photo-card {
   border: 3px solid black;
-  width: 200px;
+  width: 350px;
   height: auto;
   margin: 10px;
 }
 .gallery {
   display: flex;
   flex-wrap: wrap;
-  margin: -10px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 .stats-item {
   text-align: center;
+}
+
+.material-icons {
+  text-align: center;
+  vertical-align: bottom;
 }
 .load-more {
   margin-top: 20px;
